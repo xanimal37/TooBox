@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `first_name` VARCHAR(100) NULL,
   `last_name` VARCHAR(100) NULL,
   `preferred_name` VARCHAR(100) NULL,
-  `active` TINYINT NULL,
+  `active` TINYINT NOT NULL DEFAULT 1,
   `role` VARCHAR(45) NOT NULL DEFAULT 'USER',
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC));
