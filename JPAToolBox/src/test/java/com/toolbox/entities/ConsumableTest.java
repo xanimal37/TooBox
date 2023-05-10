@@ -12,9 +12,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
-	
-	private User user;
+class ConsumableTest {
+
+	private Consumable consumable;
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 
@@ -31,18 +31,18 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class,1);
+		consumable = em.find(Consumable.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		user = null;
+		consumable=null;
 		em.close();
 	}
 
 	@Test
-	void entity_mapping_User() {
-		assertNotNull(user);
+	void test_Consumable_entity_mapping() {
+		assertNotNull(consumable);
 	}
 
 }

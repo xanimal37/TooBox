@@ -6,6 +6,20 @@
 	
 	<!--  entities -->
 	<class>com.toolbox.entities.User</class>
+	<class>com.toolbox.entities.Builder</class>
+	<class>com.toolbox.entities.Customer</class>
+	<class>com.toolbox.entities.Specialty</class>
+	<class>com.toolbox.entities.Consumable</class>
+	<class>com.toolbox.entities.Tool</class>
+	<class>com.toolbox.entities.Inventory</class>
+	<class>com.toolbox.entities.Portfolio</class>
+	<class>com.toolbox.entities.PortfolioItem</class>
+	<class>com.toolbox.entities.Address</class>
+	<class>com.toolbox.entities.Project</class>
+	<class>com.toolbox.entities.BuildingMaterial</class>
+	<class>com.toolbox.entities.ToolCondition</class>
+	<class>com.toolbox.entities.ProjectMaterial</class>
+	<class>com.toolbox.entities.ProjectMaterialId</class>
 	<!--  end entities -->
 	
 	<properties>

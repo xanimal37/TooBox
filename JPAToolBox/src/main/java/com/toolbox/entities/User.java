@@ -3,10 +3,14 @@ package com.toolbox.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class User {
@@ -17,13 +21,31 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
+	@Column(name="create_date")
+	@CreationTimestamp
 	private LocalDateTime createDate;
+	@Column(name="update_date")
+	@UpdateTimestamp
 	private LocalDateTime updateDate;
+	@Column(name="first_name")
 	private String firstName;
+	@Column(name="last_name")
 	private String lastName;
+	@Column(name="preferred_name")
 	private String preferredName;
-	private boolean active;
+	private boolean enabled;
 	private String role;
+	
+	public User() {}
+	
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -78,12 +100,7 @@ public class User {
 	public void setPreferredName(String preferredName) {
 		this.preferredName = preferredName;
 	}
-	public boolean isActive() {
-		return active;
-	}
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+
 	public String getRole() {
 		return role;
 	}
@@ -109,7 +126,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
 				+ ", createDate=" + createDate + ", updateDate=" + updateDate + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", preferredName=" + preferredName + ", active=" + active + ", role="
+				+ ", lastName=" + lastName + ", preferredName=" + preferredName + ", active=" + enabled + ", role="
 				+ role + "]";
 	}
 	

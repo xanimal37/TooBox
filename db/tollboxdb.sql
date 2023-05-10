@@ -5,15 +5,15 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema builderdb
+-- Schema toolboxdb
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `builderdb` ;
+DROP SCHEMA IF EXISTS `toolboxdb` ;
 
 -- -----------------------------------------------------
--- Schema builderdb
+-- Schema toolboxdb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `builderdb` DEFAULT CHARACTER SET utf8 ;
-USE `builderdb` ;
+CREATE SCHEMA IF NOT EXISTS `toolboxdb` DEFAULT CHARACTER SET utf8 ;
+USE `toolboxdb` ;
 
 -- -----------------------------------------------------
 -- Table `user`
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `first_name` VARCHAR(100) NULL,
   `last_name` VARCHAR(100) NULL,
   `preferred_name` VARCHAR(100) NULL,
-  `active` TINYINT NOT NULL DEFAULT 1,
+  `enabled` TINYINT NOT NULL DEFAULT 1,
   `role` VARCHAR(45) NOT NULL DEFAULT 'USER',
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC));
@@ -79,20 +79,20 @@ DROP TABLE IF EXISTS `builder` ;
 
 CREATE TABLE IF NOT EXISTS `builder` (
   `id` INT NOT NULL,
-  `user_id` INT NOT NULL,
   `specialty_id` INT NOT NULL,
   `hourly_rate` DECIMAL NULL,
+  `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_builder_user1_idx` (`user_id` ASC),
   INDEX `fk_builder_specialty1_idx` (`specialty_id` ASC),
-  CONSTRAINT `fk_builder_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_builder_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_builder_specialty1`
     FOREIGN KEY (`specialty_id`)
     REFERENCES `specialty` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_builder_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -258,11 +258,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `project_material_used`
+-- Table `project_material`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `project_material_used` ;
+DROP TABLE IF EXISTS `project_material` ;
 
-CREATE TABLE IF NOT EXISTS `project_material_used` (
+CREATE TABLE IF NOT EXISTS `project_material` (
   `project_id` INT NOT NULL,
   `building_material_id` INT NOT NULL,
   `count` INT NULL,
@@ -364,10 +364,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- Data for table `user`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `builderdb`;
-INSERT INTO `user` (`id`, `username`, `email`, `password`, `create_date`, `update_date`, `first_name`, `last_name`, `preferred_name`, `active`, `role`) VALUES (1, 'admin', 'admin@admin.com', 'admin1', NULL, NULL, 'L', 'Zeeb', 'Zeeb', 1, 'ADMIN');
-INSERT INTO `user` (`id`, `username`, `email`, `password`, `create_date`, `update_date`, `first_name`, `last_name`, `preferred_name`, `active`, `role`) VALUES (2, 'xanimal37', 'hawkbit37@gmail.com', 'password1', NULL, NULL, 'Lisa', 'Zeeb', 'Zeeb', 1, 'USER');
-INSERT INTO `user` (`id`, `username`, `email`, `password`, `create_date`, `update_date`, `first_name`, `last_name`, `preferred_name`, `active`, `role`) VALUES (3, 'slech', 'slech@gmail.com', 'hockey!', NULL, NULL, 'Sarah', 'Lechowich', 'Sarah', 1, 'USER');
+USE `toolboxdb`;
+INSERT INTO `user` (`id`, `username`, `email`, `password`, `create_date`, `update_date`, `first_name`, `last_name`, `preferred_name`, `enabled`, `role`) VALUES (1, 'admin', 'admin@admin.com', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', NULL, NULL, 'L', 'Zeeb', 'Zeeb', 1, 'ADMIN');
+INSERT INTO `user` (`id`, `username`, `email`, `password`, `create_date`, `update_date`, `first_name`, `last_name`, `preferred_name`, `enabled`, `role`) VALUES (2, 'xanimal37', 'hawkbit37@gmail.com', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', NULL, NULL, 'Lisa', 'Zeeb', 'Zeeb', 1, 'USER');
+INSERT INTO `user` (`id`, `username`, `email`, `password`, `create_date`, `update_date`, `first_name`, `last_name`, `preferred_name`, `enabled`, `role`) VALUES (3, 'slech', 'slech@gmail.com', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', NULL, NULL, 'Sarah', 'Lechowich', 'Sarah', 1, 'USER');
 
 COMMIT;
 
@@ -376,7 +376,7 @@ COMMIT;
 -- Data for table `address`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `builderdb`;
+USE `toolboxdb`;
 INSERT INTO `address` (`id`, `street1`, `street2`, `city`, `state`, `zip_code`, `user_id`) VALUES (1, '3815 Hiawatha Ave', 'Unit 331', 'Minneapolis', 'MN', '55406', 2);
 INSERT INTO `address` (`id`, `street1`, `street2`, `city`, `state`, `zip_code`, `user_id`) VALUES (2, '1234 Apple Street', NULL, 'Mendota Heights', 'MN', '55234', 3);
 
@@ -387,7 +387,7 @@ COMMIT;
 -- Data for table `specialty`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `builderdb`;
+USE `toolboxdb`;
 INSERT INTO `specialty` (`id`, `name`, `description`) VALUES (1, 'Carpentry', 'Framing');
 INSERT INTO `specialty` (`id`, `name`, `description`) VALUES (2, 'Fine Carpentry', 'Trim, Railing, Finishes');
 INSERT INTO `specialty` (`id`, `name`, `description`) VALUES (3, 'Drywall', 'sheetrock, mudding, taping and finishing');
@@ -399,8 +399,8 @@ COMMIT;
 -- Data for table `builder`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `builderdb`;
-INSERT INTO `builder` (`id`, `user_id`, `specialty_id`, `hourly_rate`) VALUES (1, 2, 3, 30.00);
+USE `toolboxdb`;
+INSERT INTO `builder` (`id`, `specialty_id`, `hourly_rate`, `user_id`) VALUES (1, 3, 30.00, 2);
 
 COMMIT;
 
@@ -409,7 +409,7 @@ COMMIT;
 -- Data for table `customer`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `builderdb`;
+USE `toolboxdb`;
 INSERT INTO `customer` (`id`, `user_id`) VALUES (1, 3);
 
 COMMIT;
@@ -419,7 +419,7 @@ COMMIT;
 -- Data for table `project`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `builderdb`;
+USE `toolboxdb`;
 INSERT INTO `project` (`id`, `customer_id`, `builder_id`, `address_id`, `schedule_date`, `start_date`, `finish_date`, `payment_date`, `estimated_cost`, `final_cost`, `hours`, `create_date`, `update_date`) VALUES (1, 1, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
@@ -429,7 +429,7 @@ COMMIT;
 -- Data for table `inventory`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `builderdb`;
+USE `toolboxdb`;
 INSERT INTO `inventory` (`id`, `builder_id`, `create_date`, `update_date`) VALUES (1, 1, NULL, NULL);
 
 COMMIT;
@@ -439,7 +439,7 @@ COMMIT;
 -- Data for table `consumable`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `builderdb`;
+USE `toolboxdb`;
 INSERT INTO `consumable` (`id`, `inventory_id`, `brand`, `name`, `description`, `count`, `ref_image_url`, `minimium`) VALUES (1, 1, 'Fibafuse', 'Join Tape', '500 ft roll', 2, NULL, 2);
 INSERT INTO `consumable` (`id`, `inventory_id`, `brand`, `name`, `description`, `count`, `ref_image_url`, `minimium`) VALUES (2, 1, 'Straitflex', 'shims', '45, 100 pack', 1, NULL, 2);
 INSERT INTO `consumable` (`id`, `inventory_id`, `brand`, `name`, `description`, `count`, `ref_image_url`, `minimium`) VALUES (3, 1, 'Trim-tex', 'Bullnose', '2-way, 3/4\"', 10, NULL, 6);
@@ -451,7 +451,7 @@ COMMIT;
 -- Data for table `tool_condition`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `builderdb`;
+USE `toolboxdb`;
 INSERT INTO `tool_condition` (`id`, `condition`, `description`) VALUES (1, 'EXCELLENT', 'brand new; barely used; well-maintained');
 INSERT INTO `tool_condition` (`id`, `condition`, `description`) VALUES (2, 'GOOD', 'in good, useable condition');
 INSERT INTO `tool_condition` (`id`, `condition`, `description`) VALUES (3, 'OK', 'serviceable, getting worn');
@@ -465,7 +465,7 @@ COMMIT;
 -- Data for table `tool`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `builderdb`;
+USE `toolboxdb`;
 INSERT INTO `tool` (`id`, `brand`, `name`, `description`, `ref_image_url`, `inventory_id`, `tool_condition_id`) VALUES (1, NULL, 'mud pan', '24 inches, stainless steel', NULL, 1, 2);
 INSERT INTO `tool` (`id`, `brand`, `name`, `description`, `ref_image_url`, `inventory_id`, `tool_condition_id`) VALUES (2, 'Columbia', 'Tomahawk smoothing blade', '14 inches', NULL, 1, 1);
 INSERT INTO `tool` (`id`, `brand`, `name`, `description`, `ref_image_url`, `inventory_id`, `tool_condition_id`) VALUES (3, 'USG', 'mud mixer', '30 inches', NULL, 1, 1);
@@ -477,7 +477,7 @@ COMMIT;
 -- Data for table `building_material`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `builderdb`;
+USE `toolboxdb`;
 INSERT INTO `building_material` (`id`, `name`, `description`, `img_url`) VALUES (1, 'Sheetrock', '1/2\" 8x4', NULL);
 INSERT INTO `building_material` (`id`, `name`, `description`, `img_url`) VALUES (2, 'Sheetrock', '3/4\" 8x4', NULL);
 
@@ -485,11 +485,11 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `project_material_used`
+-- Data for table `project_material`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `builderdb`;
-INSERT INTO `project_material_used` (`project_id`, `building_material_id`, `count`, `cost_per_unit`) VALUES (1, 1, 6, 23.44);
+USE `toolboxdb`;
+INSERT INTO `project_material` (`project_id`, `building_material_id`, `count`, `cost_per_unit`) VALUES (1, 1, 6, 23.44);
 
 COMMIT;
 
@@ -498,7 +498,7 @@ COMMIT;
 -- Data for table `portfolio`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `builderdb`;
+USE `toolboxdb`;
 INSERT INTO `portfolio` (`id`, `name`, `description`, `create_date`, `update_date`, `builder_id`) VALUES (1, 'details', 'examples of complex sheetrock details', NULL, NULL, 1);
 
 COMMIT;
@@ -508,7 +508,7 @@ COMMIT;
 -- Data for table `portfolio_item`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `builderdb`;
+USE `toolboxdb`;
 INSERT INTO `portfolio_item` (`id`, `portfolio_id`, `img_url`, `title`, `description`) VALUES (1, 1, NULL, 'arch', 'sheetrock and mud arch detail');
 
 COMMIT;
@@ -518,7 +518,7 @@ COMMIT;
 -- Data for table `builder_has_customer`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `builderdb`;
+USE `toolboxdb`;
 INSERT INTO `builder_has_customer` (`builder_id`, `customer_id`) VALUES (1, 1);
 
 COMMIT;

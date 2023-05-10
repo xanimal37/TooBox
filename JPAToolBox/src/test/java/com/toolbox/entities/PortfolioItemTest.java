@@ -12,12 +12,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
-	
-	private User user;
+class PortfolioItemTest {
+
+	private PortfolioItem portfolioItem;
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("JPAToolBox");
@@ -30,19 +30,19 @@ class UserTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		em = emf.createEntityManager();
-		user = em.find(User.class,1);
+		em=emf.createEntityManager();
+		portfolioItem = em.find(PortfolioItem.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		user = null;
+		portfolioItem=null;
 		em.close();
 	}
 
 	@Test
-	void entity_mapping_User() {
-		assertNotNull(user);
+	void test_PortfolioItem_entity_mapping() {
+		assertNotNull(portfolioItem);
 	}
 
 }

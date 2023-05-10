@@ -12,9 +12,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
+class BuilderTest {
 	
-	private User user;
+	private Builder builder;
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 
@@ -30,19 +30,19 @@ class UserTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		em = emf.createEntityManager();
-		user = em.find(User.class,1);
+		em=emf.createEntityManager();
+		builder=em.find(Builder.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		user = null;
+		builder=null;
 		em.close();
 	}
 
 	@Test
-	void entity_mapping_User() {
-		assertNotNull(user);
+	void test_Builder_entity_mapping() {
+		assertNotNull(builder);
 	}
 
 }
