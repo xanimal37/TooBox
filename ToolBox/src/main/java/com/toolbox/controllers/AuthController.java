@@ -22,7 +22,6 @@ public class AuthController {
 	
 	@GetMapping("authenticate")
 	public User authenticate(Principal principal, HttpServletResponse res) {
-		System.out.println("fsdalkjfsdljfdf");
 		if(principal==null) { //no authorization header sent
 			res.setStatus(401);
 			res.setHeader("WWW-Authenticate", "Basic");
