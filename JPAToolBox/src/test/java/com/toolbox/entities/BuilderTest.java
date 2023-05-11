@@ -43,6 +43,31 @@ class BuilderTest {
 	@Test
 	void test_Builder_entity_mapping() {
 		assertNotNull(builder);
+		assertEquals(30.00,builder.getHourlyRate());
+	}
+	
+	@Test
+	void test_Builder_User_mapping() {
+		assertNotNull(builder);
+		assertEquals(2, builder.getUser().getId());
+	}
+	
+	@Test
+	void test_Builder_Specialty_mapping() {
+		assertNotNull(builder);
+		assertEquals(3,builder.getSpecialty().getId());
+	}
+	
+	@Test
+	void test_Builder_Customer_mapping() {
+		assertNotNull(builder);
+		assertEquals(1, builder.getCustomers().size());
+	}
+	
+	@Test
+	void test_Builder_Project_mapping() {
+		assertNotNull(builder);
+		assertEquals(1, builder.getProjects().size());
 	}
 
 }

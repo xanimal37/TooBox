@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -37,6 +39,26 @@ public class Project {
 	@Column(name="update_date")
 	@UpdateTimestamp
 	private LocalDateTime updateDate;
+	
+	//relationships
+	@ManyToOne
+	@JoinColumn(name="builder_id")
+	private Builder builder;
+	
+	public Project() {}
+	
+	//getters setters
+	public Builder getBuilder() {
+		return builder;
+	}
+
+	public void setBuilder(Builder builder) {
+		this.builder = builder;
+	}
+
+
+
+
 	public int getId() {
 		return id;
 	}

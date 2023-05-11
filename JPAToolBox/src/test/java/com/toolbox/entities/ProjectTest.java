@@ -44,5 +44,11 @@ class ProjectTest {
 	void test_Project_entity_mapping() {
 		assertNotNull(project);
 	}
+	
+	@Test
+	void test_Project_Builder_mapping() {
+		assertNotNull(project);
+		assertEquals(1,project.getBuilder().getId());
+	}
 
 }
