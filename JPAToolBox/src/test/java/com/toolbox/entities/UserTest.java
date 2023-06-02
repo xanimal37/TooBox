@@ -52,10 +52,17 @@ class UserTest {
 		assertEquals(4,user.getSpecialty().getId());
 		
 	}
+	
 	@Test 
 	void test_User_Projects_mapping(){
 		assertNotNull(user);
 		assertEquals(1,user.getProjects().size());
+	}
+	
+	@Test
+	void test_User_Portfolios_mapping(){
+		assertNotNull(user);
+		assertEquals(2,user.getPortfolios().size());
 	}
 	
 

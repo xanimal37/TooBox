@@ -47,16 +47,30 @@ public class User {
 	
 	@OneToMany(mappedBy="user")
 	private List<Project> projects;
+	
+	@OneToMany(mappedBy="user")
+	private List<Portfolio> portfolios;
 
 	//constructor
 	public User() {}
 	
+	//getters and setters
+	
+	
 	public List<Project> getProjects() {
 		return projects;
 	}
-
+	
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
+	}
+
+	public List<Portfolio> getPortfolios() {
+		return portfolios;
+	}
+
+	public void setPortfolios(List<Portfolio> portfolios) {
+		this.portfolios = portfolios;
 	}
 
 	public Specialty getSpecialty() {
