@@ -5,7 +5,14 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Table(name="project_material")
 @Entity
 public class ProjectMaterial {
 
@@ -16,8 +23,37 @@ public class ProjectMaterial {
     @Column(name="cost_per_unit")
     private Double costPerUnit;
     
+    //relationships
+    @ManyToOne
+    @JoinColumn(name="building_material_id")
+    @MapsId(value="buildingMaterialId")
+	private BuildingMaterial buildingMaterial;
+    
+    @JsonIgnoreProperties({"projectMaterials"})
+    @ManyToOne
+    @JoinColumn(name="project_id")
+    @MapsId(value="projectId")
+	private Project project;
+    
     public ProjectMaterial() {}
     
+    //getters and setters
+	public BuildingMaterial getBuildingMaterial() {
+		return buildingMaterial;
+	}
+
+	public void setBuildingMaterial(BuildingMaterial buildingMaterial) {
+		this.buildingMaterial = buildingMaterial;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
 	public ProjectMaterialId getProjectMaterialId() {
 		return projectMaterialId;
 	}

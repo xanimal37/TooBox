@@ -1,0 +1,17 @@
+nav {
+  margin:0;
+  padding:0;
+  background-color: gold;
+}
+
+ul {
+  display:flex;
+  flex-wrap: wrap;
+  flex-direction: horizontal;
+  align-items: center;
+  list-style-type: none;
+}
+
+ul li {
+  margin: .2em;
+}

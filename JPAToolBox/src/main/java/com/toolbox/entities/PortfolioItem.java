@@ -20,6 +20,7 @@ public class PortfolioItem {
 	private String description;
 	@Column(name="img_url")
 	private String imgURL;
+	
 	public int getId() {
 		return id;
 	}

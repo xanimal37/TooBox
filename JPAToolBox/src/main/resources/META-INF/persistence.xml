@@ -6,8 +6,6 @@
 	
 	<!--  entities -->
 	<class>com.toolbox.entities.User</class>
-	<class>com.toolbox.entities.Builder</class>
-	<class>com.toolbox.entities.Customer</class>
 	<class>com.toolbox.entities.Specialty</class>
 	<class>com.toolbox.entities.Consumable</class>
 	<class>com.toolbox.entities.Tool</class>

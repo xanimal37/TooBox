@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Consumable {
@@ -21,8 +23,21 @@ public class Consumable {
 	@Column(name="ref_image_url")
 	private String refImageURL;
 	
+	//relationships
+	@ManyToOne
+	@JoinColumn(name="inventory_id")
+	private Inventory inventory;
+	
 	public Consumable() {}
 	
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
+
 	public int getId() {
 		return id;
 	}

@@ -1,6 +1,7 @@
 package com.toolbox.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -10,9 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Project {
@@ -42,22 +46,34 @@ public class Project {
 	
 	//relationships
 	@ManyToOne
-	@JoinColumn(name="builder_id")
-	private Builder builder;
+	@JoinColumn(name="user_id")
+	@JsonIgnoreProperties({"projects"})
+	private User user;
+	
+	@JsonIgnoreProperties({"project"})
+	@OneToMany(mappedBy="project")
+	private List<ProjectMaterial> projectMaterials;
 	
 	public Project() {}
 	
+	
+	
+	public List<ProjectMaterial> getProjectMaterials() {
+		return projectMaterials;
+	}
+
+	public void setProjectMaterials(List<ProjectMaterial> projectMaterials) {
+		this.projectMaterials = projectMaterials;
+	}
+
 	//getters setters
-	public Builder getBuilder() {
-		return builder;
+	public User getUser() {
+		return user;
 	}
 
-	public void setBuilder(Builder builder) {
-		this.builder = builder;
+	public void setUser(User user) {
+		this.user = user;
 	}
-
-
-
 
 	public int getId() {
 		return id;

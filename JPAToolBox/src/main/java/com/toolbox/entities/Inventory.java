@@ -1,6 +1,7 @@
 package com.toolbox.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -24,8 +26,32 @@ public class Inventory {
 	@UpdateTimestamp
 	private LocalDateTime updateDate;
 	
+	//relationships
+	@OneToMany(mappedBy="inventory")
+	private List<Consumable> consumables;
+	
+	@OneToMany(mappedBy="inventory")
+	private List<Tool> tools;
+	
+	
 	public Inventory() {}
 	
+	public List<Consumable> getConsumables() {
+		return consumables;
+	}
+
+	public void setConsumables(List<Consumable> consumables) {
+		this.consumables = consumables;
+	}
+
+	public List<Tool> getTools() {
+		return tools;
+	}
+
+	public void setTools(List<Tool> tools) {
+		this.tools = tools;
+	}
+
 	public int getId() {
 		return id;
 	}

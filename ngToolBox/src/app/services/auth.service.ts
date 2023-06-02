@@ -21,6 +21,11 @@ export class AuthService {
     return Buffer.from(`${username}:${password}`).toString('base64');
   }
 
+  //get login status from local storage
+  getCredentials():string | null {
+    return localStorage.getItem('credentials');
+  }
+
   login(username:string,password:string):Observable<User>{
     //make credentials
     const credentials = this.generateBasicAuthCredentials(username,password);

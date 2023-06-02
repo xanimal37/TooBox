@@ -14,7 +14,7 @@ import com.toolbox.services.AuthService;
 
 
 @RestController
-@CrossOrigin({"*", "http://localhost/"})
+@CrossOrigin({"*", "http://localhost"})
 public class AuthController {
 	
 	@Autowired

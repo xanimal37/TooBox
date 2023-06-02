@@ -31,7 +31,7 @@ class SpecialtyTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em=emf.createEntityManager();
-		specialty=em.find(Specialty.class, 1);
+		specialty=em.find(Specialty.class, 4);
 	}
 
 	@AfterEach
@@ -44,5 +44,7 @@ class SpecialtyTest {
 	void test_Specialty_entity_mapping() {
 		assertNotNull(specialty);
 	}
+	
+	
 
 }

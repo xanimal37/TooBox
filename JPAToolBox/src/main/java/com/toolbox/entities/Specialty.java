@@ -1,11 +1,13 @@
 package com.toolbox.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Specialty {
@@ -34,6 +36,7 @@ public class Specialty {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

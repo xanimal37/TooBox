@@ -1,6 +1,7 @@
 package com.toolbox.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -36,7 +40,32 @@ public class User {
 	private boolean enabled;
 	private String role;
 	
+	//relationships
+	@ManyToOne
+	@JoinColumn(name="specialty_id")
+	private Specialty specialty;
+	
+	@OneToMany(mappedBy="user")
+	private List<Project> projects;
+
+	//constructor
 	public User() {}
+	
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
+	public Specialty getSpecialty() {
+		return specialty;
+	}
+
+	public void setSpecialty(Specialty specialty) {
+		this.specialty = specialty;
+	}
 	
 	public boolean isEnabled() {
 		return enabled;

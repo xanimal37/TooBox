@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Tool {
@@ -19,6 +22,33 @@ public class Tool {
 	private String description;
 	@Column(name="ref_image_url")
 	private String refImageURL;
+	
+	//relationships
+	@ManyToOne
+	@JoinColumn(name="inventory_id")
+	private Inventory inventory;
+	
+	@ManyToOne
+	@JoinColumn(name="tool_condition_id")
+	private ToolCondition toolCondition;
+	
+	public Tool() {}
+	
+	public ToolCondition getToolCondition() {
+		return toolCondition;
+	}
+
+	public void setToolCondition(ToolCondition toolCondition) {
+		this.toolCondition = toolCondition;
+	}
+
+	public Inventory getInventory() {
+		return inventory;
+	}
+	
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
 	public int getId() {
 		return id;
 	}

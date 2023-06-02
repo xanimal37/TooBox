@@ -41,8 +41,14 @@ class ToolTest {
 	}
 
 	@Test
-	void test() {
+	void test_Tool_entity_mapping() {
 		assertNotNull(tool);
+	}
+	
+	@Test
+	void test_Tool_ToolCondition_mapping() {
+		assertNotNull(tool);
+		assertEquals(2,tool.getToolCondition().getId());
 	}
 
 }

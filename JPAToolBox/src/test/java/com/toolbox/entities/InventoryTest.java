@@ -44,5 +44,19 @@ class InventoryTest {
 	void test_Inventory_entity_mapping() {
 		assertNotNull(inventory);
 	}
+	
+	@Test
+	void test_Inventory_Consumable_mapping() {
+		assertNotNull(inventory);
+		assertEquals(3,inventory.getConsumables().size());
+	}
+	
+	@Test
+	void test_Inventory_Tool_mapping() {
+		assertNotNull(inventory);
+		assertEquals(3,inventory.getTools().size());
+	}
+	
+	
 
 }

@@ -31,7 +31,7 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class,1);
+		user = em.find(User.class,2);
 	}
 
 	@AfterEach
@@ -39,10 +39,24 @@ class UserTest {
 		user = null;
 		em.close();
 	}
+	
+	@Test 
+	void test_entity_mapping_User(){
+		assertNotNull(user);
+		assertEquals("xanimal37",user.getUsername());
+	}
 
 	@Test
-	void entity_mapping_User() {
+	void test_User_Specialty_mapping() {
 		assertNotNull(user);
+		assertEquals(4,user.getSpecialty().getId());
+		
 	}
+	@Test 
+	void test_User_Projects_mapping(){
+		assertNotNull(user);
+		assertEquals(1,user.getProjects().size());
+	}
+	
 
 }

@@ -46,9 +46,9 @@ class ProjectTest {
 	}
 	
 	@Test
-	void test_Project_Builder_mapping() {
+	void test_Project_User_mapping() {
 		assertNotNull(project);
-		assertEquals(1,project.getBuilder().getId());
+		assertEquals(2,project.getUser().getId());
 	}
 
 }
