@@ -48,8 +48,6 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<Project> projects;
 	
-	@OneToMany(mappedBy="user")
-	private List<Portfolio> portfolios;
 
 	//constructor
 	public User() {}
@@ -65,13 +63,6 @@ public class User {
 		this.projects = projects;
 	}
 
-	public List<Portfolio> getPortfolios() {
-		return portfolios;
-	}
-
-	public void setPortfolios(List<Portfolio> portfolios) {
-		this.portfolios = portfolios;
-	}
 
 	public Specialty getSpecialty() {
 		return specialty;

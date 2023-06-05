@@ -1,7 +1,6 @@
 package com.toolbox.entities;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,33 +13,45 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
-public class Portfolio {
-
+public class Workday {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private String name;
-	private String description;
+	@Column(name="start_time")
+	private LocalDateTime startTime;
+	@Column(name="finish_time")
+	private LocalDateTime finishTime;
 	@Column(name="create_date")
 	@CreationTimestamp
 	private LocalDateTime createDate;
 	@Column(name="update_date")
 	@UpdateTimestamp
 	private LocalDateTime updateDate;
-	
+	private String note;
 	//relationship
 	@ManyToOne
-	@JoinColumn(name="user_id")
-	private User user;
+	@JoinColumn(name="project_id")
+	private Project project;
 	
-	public User getUser() {
-		return user;
+	//constructor
+	
+	//getters and setters
+	public Project getProject() {
+		return project;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	
+	void setProject(Project project) {
+		this.project = project;
+	}
+	
+	public String getNote() {
+		return note;
+	}
+	
+	public void setNote(String note) {
+		this.note = note;
 	}
 	
 	public int getId() {
@@ -49,17 +60,17 @@ public class Portfolio {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public LocalDateTime getStartTime() {
+		return startTime;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
 	}
-	public String getDescription() {
-		return description;
+	public LocalDateTime getFinishTime() {
+		return finishTime;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setFinishTime(LocalDateTime finishTime) {
+		this.finishTime = finishTime;
 	}
 	public LocalDateTime getCreateDate() {
 		return createDate;
@@ -73,25 +84,7 @@ public class Portfolio {
 	public void setUpdateDate(LocalDateTime updateDate) {
 		this.updateDate = updateDate;
 	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Portfolio other = (Portfolio) obj;
-		return id == other.id;
-	}
-	@Override
-	public String toString() {
-		return "Portfolio [id=" + id + ", name=" + name + "]";
-	}
 	
 	
+
 }

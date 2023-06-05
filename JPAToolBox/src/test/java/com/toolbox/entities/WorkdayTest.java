@@ -12,9 +12,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
+class WorkdayTest {
 	
-	private User user;
+	private Workday workday;
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 
@@ -31,35 +31,25 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class,2);
+		workday = em.find(Workday.class,2);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		user = null;
+		workday=null;
 		em.close();
-	}
-	
-	@Test 
-	void test_entity_mapping_User(){
-		assertNotNull(user);
-		assertEquals("xanimal37",user.getUsername());
 	}
 
 	@Test
-	void test_User_Specialty_mapping() {
-		assertNotNull(user);
-		assertEquals(4,user.getSpecialty().getId());
-		
+	void test_Workday_mapping() {
+		assertNotNull(workday);
+		assertEquals("ran out of paint",workday.getNote());
 	}
 	
-	@Test 
-	void test_User_Projects_mapping(){
-		assertNotNull(user);
-		assertEquals(1,user.getProjects().size());
+	@Test
+	void test_Workday_Project_mapping() {
+		assertNotNull(workday);
+		assertEquals(2,workday.getProject().getId());
 	}
-	
-	
-	
 
 }

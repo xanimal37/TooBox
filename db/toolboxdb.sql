@@ -296,6 +296,30 @@ CREATE TABLE IF NOT EXISTS `tool` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+
+-- -----------------------------------------------------
+-- Table `workday`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `workday` ;
+
+CREATE TABLE IF NOT EXISTS `workday` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `start_time` DATETIME NULL,
+  `finish_time` DATETIME NULL,
+  `create_date` DATETIME NULL,
+  `update_date` DATETIME NULL,
+  `hours` DECIMAL NULL,
+  `project_id` INT(11) NOT NULL,
+  `note` VARCHAR(1000) NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_workday_project1_idx` (`project_id` ASC),
+  CONSTRAINT `fk_workday_project1`
+    FOREIGN KEY (`project_id`)
+    REFERENCES `project` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS builder1@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -352,6 +376,7 @@ START TRANSACTION;
 USE `toolboxdb`;
 INSERT INTO `portfolio` (`id`, `name`, `description`, `create_date`, `update_date`, `user_id`) VALUES (1, 'drywall project 1', 'basement room, unusual house', NULL, NULL, 2);
 INSERT INTO `portfolio` (`id`, `name`, `description`, `create_date`, `update_date`, `user_id`) VALUES (2, 'best roof ever', 'huge complicated roof', NULL, NULL, 3);
+INSERT INTO `portfolio` (`id`, `name`, `description`, `create_date`, `update_date`, `user_id`) VALUES (3, 'small floor tile project', 'small floor at stair landing', NULL, NULL, 2);
 
 COMMIT;
 
@@ -363,6 +388,18 @@ START TRANSACTION;
 USE `toolboxdb`;
 INSERT INTO `project` (`id`, `project_name`, `schedule_date`, `start_date`, `finish_date`, `payment_date`, `estimated_cost`, `final_cost`, `hours`, `create_date`, `update_date`, `address_id`, `user_id`) VALUES (1, 'A small person', NULL, NULL, NULL, NULL, 1300.00, 1230.00, 10, NULL, NULL, 3, 2);
 INSERT INTO `project` (`id`, `project_name`, `schedule_date`, `start_date`, `finish_date`, `payment_date`, `estimated_cost`, `final_cost`, `hours`, `create_date`, `update_date`, `address_id`, `user_id`) VALUES (2, 'huge roof johnson', NULL, NULL, NULL, NULL, 14000.00, 14000.00, 8, NULL, NULL, 1, 3);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `workday`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `toolboxdb`;
+INSERT INTO `workday` (`id`, `start_time`, `finish_time`, `create_date`, `update_date`, `hours`, `project_id`, `note`) VALUES (1, NULL, NULL, NULL, NULL, NULL, 1, NULL);
+INSERT INTO `workday` (`id`, `start_time`, `finish_time`, `create_date`, `update_date`, `hours`, `project_id`, `note`) VALUES (2, NULL, NULL, NULL, NULL, NULL, 2, 'ran out of paint');
+INSERT INTO `workday` (`id`, `start_time`, `finish_time`, `create_date`, `update_date`, `hours`, `project_id`, `note`) VALUES (3, NULL, NULL, NULL, NULL, NULL, 2, NULL);
 
 COMMIT;
 

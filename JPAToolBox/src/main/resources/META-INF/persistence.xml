@@ -18,6 +18,7 @@
 	<class>com.toolbox.entities.ToolCondition</class>
 	<class>com.toolbox.entities.ProjectMaterial</class>
 	<class>com.toolbox.entities.ProjectMaterialId</class>
+	<class>com.toolbox.entities.Workday</class>
 	<!--  end entities -->
 	
 	<properties>

@@ -24,7 +24,7 @@ public class ProjectController {
 	private ProjectService projectService;
 	
 	//get projects
-	@GetMapping(path="/project")
+	@GetMapping(path="/projects")
 	public List<Project> getProjects(HttpServletRequest req, HttpServletResponse res, Principal principal){
 		return projectService.getUserProjects(principal.getName());
 	}

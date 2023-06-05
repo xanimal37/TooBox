@@ -1,8 +1,10 @@
 package com.toolbox.services;
 
+import java.util.List;
+
 import com.toolbox.entities.Portfolio;
 
 public interface PortfolioService {
 
-	public Portfolio getUserPortfolio(String username);
+	public List<Portfolio> getUserPortfolios(String username);
 }
