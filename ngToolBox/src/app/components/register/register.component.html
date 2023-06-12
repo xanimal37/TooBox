@@ -1,1 +1,15 @@
 <p>register works!</p>
+<div id="Register">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="username">username: </label>
+      <input type="text" id="username" formControlName="username" class="form-control">
+      <label for="password">password: </label>
+      <input type="text" id="password" formControlName="password" class="form-control">
+      <label for="specialty">skill</label>
+      <input type=""
+    </div>
+  <button type="submit">login</button>
+
+  </form>
+</div>
